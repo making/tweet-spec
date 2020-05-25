@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Tweeter API
   version: 0.1.0-SNAPSHOT
-  description: TweeterのAPIです。
+  description: Tweeter API
   license:
     name: Apache 2.0
 servers:
@@ -10,7 +10,7 @@ servers:
 paths:
   '/tweets/{uuid}':
     get:
-      summary: 指定つぶやき一件取得
+      summary: Get a tweet
       tags:
       - Tweet
       responses:
@@ -27,7 +27,7 @@ paths:
                     text: 'Hi!'
                     createdAt: '2020-05-07T13:38:57.366Z'
       operationId: get-tweets-uuid
-      description: 指定したUUIDのつぶやきを取得します。
+      description: Get the tweet that has the given uuid
     parameters:
     - schema:
         type: string
@@ -36,17 +36,17 @@ paths:
       required: true
       description: UUID
     delete:
-      summary: 指定つぶやき一件削除
+      summary: Delete a tweet
       operationId: delete-tweets-uuid
       responses:
         '204':
           description: No Content
-      description: 指定したUUIDのつぶやきを削除します。
+      description: Delete the tweet that has the given uuid
       tags:
       - Tweet
   /tweets:
     post:
-      summary: 自分のつぶやき作成
+      summary: Create a tweet
       operationId: post-tweets
       responses:
         '201':
@@ -55,7 +55,7 @@ paths:
             Location:
               schema:
                 type: string
-              description: 作成されたつぶやきのURL
+              description: URL for the created tweet
           content:
             application/json:
               schema:
@@ -73,15 +73,15 @@ paths:
               Sample:
                 value:
                   text: Hello
-        description: つぶやき情報
-      description: 自分のつぶやきを作成します。
+        description: Tweet Information
+      description: Crate a tweet with the given Information.
       tags:
       - Tweet
       parameters: []
     get:
-      summary: つぶやき一覧
+      summary: List tweets
       operationId: get-tweets
-      description: つぶやき一覧を取得します。
+      description: List tweets
       tags:
       - Tweet
       responses:
@@ -120,7 +120,7 @@ components:
           uuid: d188c790-8c28-4507-b8cd-e422d6073a93
           text: 'Hello World!'
           createdAt: '2020-05-06T05:38:55.297765Z'
-      description: つぶやき(レスポンス)
+      description: The reponse of Tweet
       properties:
         uuid:
           type: string
@@ -129,10 +129,10 @@ components:
         text:
           type: string
           description: |
-            つぶやきテキスト
+            Tweet text
         createdAt:
           type: string
-          description: 作成時刻
+          description: created date time
           format: date-time
       required:
       - uuid
@@ -143,7 +143,7 @@ components:
     TweetRequest:
       title: TweetRequest
       type: object
-      description: つぶやき(リクエスト)
+      description: The request of Tweet
       x-examples:
         Example:
           text: 'Hello World!'
@@ -151,7 +151,7 @@ components:
         text:
           type: string
           description: |
-            つぶやきテキスト
+            Tweet text
           minLength: 1
           maxLength: 128
       required:
