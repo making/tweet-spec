@@ -1,0 +1,14 @@
+{
+  "apiPackage": "am.ik.lab.tweet.spec",
+  "modelPackage": "am.ik.lab.tweet.spec",
+  "groupId": "am.ik.lab",
+  "artifactId": "tweet-spec",
+  "dateLibrary": "java8",
+  "delegatePattern": false,
+  "java8": true,
+  "skipDefaultInterface": true,
+  "reactive": false,
+  "interfaceOnly": true,
+  "serializableModel": true,
+  "performBeanValidation": true
+}

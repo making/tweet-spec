@@ -1,0 +1,160 @@
+openapi: 3.0.0
+info:
+  title: Tweeter API
+  version: 0.1.0-SNAPSHOT
+  description: TweeterのAPIです。
+  license:
+    name: Apache 2.0
+servers:
+- url: 'http://localhost:8080'
+paths:
+  '/tweets/{uuid}':
+    get:
+      summary: 指定つぶやき一件取得
+      tags:
+      - Tweet
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TweetResponse'
+              examples:
+                Sample:
+                  value:
+                    uuid: 2bf80fec-ea55-4d05-b3ea-392bcec7483e
+                    text: 'Hi!'
+                    createdAt: '2020-05-07T13:38:57.366Z'
+      operationId: get-tweets-uuid
+      description: 指定したUUIDのつぶやきを取得します。
+    parameters:
+    - schema:
+        type: string
+      name: uuid
+      in: path
+      required: true
+      description: UUID
+    delete:
+      summary: 指定つぶやき一件削除
+      operationId: delete-tweets-uuid
+      responses:
+        '204':
+          description: No Content
+      description: 指定したUUIDのつぶやきを削除します。
+      tags:
+      - Tweet
+  /tweets:
+    post:
+      summary: 自分のつぶやき作成
+      operationId: post-tweets
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+              description: 作成されたつぶやきのURL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TweetResponse'
+              examples:
+                Sample:
+                  value:
+                    text: Hello
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TweetRequest'
+            examples:
+              Sample:
+                value:
+                  text: Hello
+        description: つぶやき情報
+      description: 自分のつぶやきを作成します。
+      tags:
+      - Tweet
+      parameters: []
+    get:
+      summary: つぶやき一覧
+      operationId: get-tweets
+      description: つぶやき一覧を取得します。
+      tags:
+      - Tweet
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TweetResponse'
+              examples:
+                Sample:
+                  value:
+                  - uuid: 52b6e221-77f9-4e1f-bdf7-2dcf09c44b81
+                    text: Hello3
+                    createdAt: '2020-05-07T13:39:57.366Z'
+                  - uuid: 2bf80fec-ea55-4d05-b3ea-392bcec7483e
+                    text: 'Hi!'
+                    createdAt: '2020-05-07T13:38:57.366Z'
+                  - uuid: 5b74be91-5c13-4b0e-908d-f3fa9aa70b26
+                    text: Hello2
+                    createdAt: '2020-05-07T13:37:57.366Z'
+                  - uuid: 127f679c-b4e3-450b-bb3f-b5b7f32fc6a0
+                    text: Hello1
+                    createdAt: '2020-05-07T13:36:57.366Z'
+      parameters: []
+
+components:
+  schemas:
+    TweetResponse:
+      title: TweetResponse
+      type: object
+      x-examples:
+        Sample:
+          uuid: d188c790-8c28-4507-b8cd-e422d6073a93
+          text: 'Hello World!'
+          createdAt: '2020-05-06T05:38:55.297765Z'
+      description: つぶやき(レスポンス)
+      properties:
+        uuid:
+          type: string
+          description: UUID
+          format: uuid
+        text:
+          type: string
+          description: |
+            つぶやきテキスト
+        createdAt:
+          type: string
+          description: 作成時刻
+          format: date-time
+      required:
+      - uuid
+      - text
+      - createdAt
+      x-tags:
+      - Tweet
+    TweetRequest:
+      title: TweetRequest
+      type: object
+      description: つぶやき(リクエスト)
+      x-examples:
+        Example:
+          text: 'Hello World!'
+      properties:
+        text:
+          type: string
+          description: |
+            つぶやきテキスト
+          minLength: 1
+          maxLength: 128
+      required:
+      - text
+      x-tags:
+      - Tweet
