@@ -44,3 +44,9 @@ and
 </repositories>
 ```
 
+## How to generate source code from the spec
+
+
+```
+./openapi/generate-sources.sh
+```
