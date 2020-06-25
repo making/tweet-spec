@@ -1,5 +1,8 @@
 # OpenAPI Spec Template
 
+* [ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/making/tweet-spec/master/openapi/doc.yml)
+* [Swagger UI](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/making/tweet-spec/master/openapi/doc.yml)
+
 ## Include the generated spec
 
 ```xml
